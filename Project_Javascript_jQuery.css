@@ -1,0 +1,28 @@
+#container {
+	position: relative;
+	top: 30px;
+	outline:2px solid #000;
+	font-size: 0;
+	margin:auto;
+	height:960px;
+	width:960px;
+	padding: 0;
+	border: none;
+}
+
+.grid {
+    display: table-cell;
+	padding:0;
+	border:none;
+	outline:1px solid #000;
+    display:inline-block;
+}
+
+.btn {
+    border-radius: 50%;
+    background-color: green;
+}
+
+.hider {
+    visibility: hidden;
+}
