@@ -1,4 +1,14 @@
 // function that builds a grid in the "container"
+
+var _XCord;
+var _YCord;
+
+function SetSecretGrid()
+{
+    _XCord = Math.floor(Math.random() * (15 - (-1) + 1));
+    _YCord = Math.floor(Math.random() * (15 - (-1) + 1));
+}
+
 function createGrid(x) {
     for (var rows = 0; rows < x; rows++) {
         for (var columns = 0; columns < x; columns++) {
@@ -24,13 +34,14 @@ function refreshGrid(){
 };
 
 function matchGridCord(gridCord){
-    return (gridCord == "5,8") ? true : false;
+    return (gridCord == _XCord + "," + _YCord) ? true : false;
 }
 // create a 16x16 grid when the page loads
 // allows the click of a button to prompt the user to create a new grid
 $(document).ready(function() {
     createGrid(16);
-
+    SetSecretGrid();
+    alert(_XCord + " " + _YCord)
     $(".clearGrid").click(function(){
         clearGrid();
     });
@@ -40,18 +51,10 @@ $(document).ready(function() {
         $(this).css('background-color', 'red');
         if (isMatch)
         {
-            //this.text = "Found!";
-            //$(this).text("Found!"); 
-            //$(this).innerHTML = "Found!"; 
-            //$(this).html($(this).html().replace(' ','Found!'));
             document.getElementById($(this).attr('id')).innerHTML = "Found!";
         }
         else
         {
-            //this.text = "Not Found!";
-            //$(this).text("Nope!"); 
-            //$(this).innerHTML = "Not Found!"; 
-            //$(this).html($(this).html().replace(' ','Not Found!'));
             document.getElementById($(this).attr('id')).innerHTML = "Not Found!";
         }
    })
