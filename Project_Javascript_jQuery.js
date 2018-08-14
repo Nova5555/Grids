@@ -16,7 +16,7 @@ function SetSecretGrid()
 
 function SetLevelVisual()
 {
-    document.getElementById("level").innerHTML = "Level " + _CurrentLevel;
+    document.getElementById("level").innerHTML = "Level " + _CurrentLevel + " GS:" + _GameSpeed;
 }
 
 function TakeTurn()
@@ -114,14 +114,11 @@ function createGrid(x) {
     $(".grid").height(960/x);
 };
 
-// function that clears the grid
 function clearGrid(){
     $(".grid").remove();
     $(".win").remove();
 };  
 
-// function that prompts the user to select the number of boxes in a new grid
-// the function then also creates that new grid
 function refreshGrid(){
     var z = prompt("How many boxes per side?");
     clearGrid();
@@ -155,8 +152,7 @@ function RestartGame()
 function matchGridCord(gridCord){
     return (gridCord == _XCord + "," + _YCord) ? true : false;
 }
-// create a 16x16 grid when the page loads
-// allows the click of a button to prompt the user to create a new grid
+
 $(document).ready(function() {
     SetupGrid();
 });
