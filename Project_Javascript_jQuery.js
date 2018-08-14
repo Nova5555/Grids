@@ -6,6 +6,7 @@ var _CPUPlayer;
 var _CurrentLevel = 1;
 var _GameSpeed = 1000;
 var _GridSize = 5;
+var _CPUStarted = false;
 
 function SetSecretGrid()
 {
@@ -20,7 +21,10 @@ function SetLevelVisual()
 
 function TakeTurn()
 {
+    if (!_CPUStarted){
     _CPUPlayer = setInterval(compsTurn,_GameSpeed);
+    _CPUStarted = true;
+    }
 }
 
 function compsTurn()
@@ -51,7 +55,6 @@ function NextLevel()
     createGrid(_GridSize);
     AddGridClickEvent();
     SetSecretGrid();
-    TakeTurn();
 }
 
 function checkWinCondition()
@@ -59,15 +62,15 @@ function checkWinCondition()
     if (_win == "Player"){
         clearInterval(_CPUPlayer);
         $("#container").append("<div class='win'>You win!!</div>");
-        //NextLevel();
+        _CPUStarted = false;
         setTimeout(function () {NextLevel()},2000);
-        //delay(NextLevel(),3000);
     }
     else if (_win == "CPU") 
     {
         clearInterval(_CPUPlayer);
         $("#container").append("<div class='win'>You lose!!</div>");
-        setTimeout(function () {SetupGrid()},2000);
+        _CPUStarted = false;
+        setTimeout(function () {RestartGame()},2000);
     }
 }
 
@@ -83,6 +86,7 @@ function checkGridState(gridCords)
 
 function checkGameBoard(id,who)
 {
+    TakeTurn();
     var isMatch = matchGridCord(id)
     if (isMatch)
     {
@@ -137,7 +141,6 @@ function SetupGrid()
     createGrid(_GridSize);
     SetSecretGrid();
     AddGridClickEvent();
-    TakeTurn();
 }
 
 function RestartGame()
@@ -145,6 +148,7 @@ function RestartGame()
     _GameSpeed = 1000;
     _GridSize = 5;
     _CurrentLevel = 1;
+    SetLevelVisual();
     SetupGrid();
 }
 
